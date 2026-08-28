@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pramote Damkram - Web Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Prompt', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --bg-dark: #121212;
+            --bg-light: #ffffff;
+            --bg-gray: #f5f5f5;
+            --text-dark: #333333;
+            --text-light: #f9f9f9;
+            --accent-red: #D92525; /* โทนสีแดงอิงจาก SPU */
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Navigation Bar */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(18, 18, 18, 0.95);
+            padding: 15px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .logo {
+            color: var(--text-light);
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--accent-red);
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 0.9rem;
+            font-weight: 400;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-red);
+        }
+
+        /* Hero Section */
+        #hero {
+            height: 100vh;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        #hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        #hero h2 {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: #aaaaaa;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            background-color: var(--accent-red);
+            color: var(--text-light);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #b81f1f;
+            transform: translateY(-2px);
+        }
+
+        /* General Section Styles */
+        section {
+            padding: 80px 10%;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-align: center;
+            color: var(--bg-dark);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-red);
+            display: block;
+            margin: 10px auto 0;
+        }
+
+        /* About Section */
+        #about {
+            background-color: var(--bg-light);
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        #about p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        /* Education & Experience */
+        #education {
+            background-color: var(--bg-gray);
+        }
+
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline-item {
+            background: var(--bg-light);
+            padding: 25px;
+            border-left: 4px solid var(--accent-red);
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .timeline-item:hover {
+            transform: translateX(10px);
+        }
+
+        .timeline-year {
+            font-weight: 700;
+            color: var(--accent-red);
+            margin-bottom: 5px;
+        }
+
+        .timeline-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--bg-dark);
+        }
+
+        .timeline-desc {
+            color: #666;
+            font-size: 0.95rem;
+            margin-top: 5px;
+        }
+
+        /* Skills Section */
+        #skills {
+            background-color: var(--bg-light);
+            text-align: center;
+        }
+
+        .skills-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .skill-tag {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 400;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .skill-tag:hover {
+            background-color: var(--accent-red);
+        }
+
+        /* Projects Section */
+        #projects {
+            background-color: var(--bg-gray);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background-color: var(--bg-light);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-top: 4px solid transparent;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+        .project-card:hover {
+            border-top-color: var(--accent-red);
+            transform: translateY(-5px);
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--bg-dark);
+        }
+
+        .project-desc {
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        /* Contact & Footer Section */
+        #contact {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 1rem;
+        }
+
+        .contact-item strong {
+            color: var(--accent-red);
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+
+        .contact-item a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .contact-item a:hover {
+            color: var(--accent-red);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                padding: 15px;
+            }
+            .nav-links {
+                margin-top: 15px;
+            }
+            .nav-links a {
+                margin: 0 10px;
+            }
+            #hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#hero" class="logo">Personal information<span>.</span></a>
+        <div class="nav-links">
+            <a href="#about">ข้อมูลเบื้องต้น</a>
+            <a href="#education">การศึกษา</a>
+            <a href="#skills">ทักษะ</a>
+            <a href="#projects">ผลงาน</a>
+            <a href="#contact">ติดต่อ</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <h1>ปราโมท ดำคราม</h1>
+        <h2>WEB DEVELOPER / RPA & AI AUTOMATION DEVELOPER</h2>
+        <a href="#contact" class="btn">ติดต่อฉัน</a>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="section-title">ประวัติเบื้องต้น</h2>
+        <p>ผมนักศึกษาคณะเทคโนโลยีสารสนเทศ (ICT) มหาวิทยาลัยศรีปทุม มีความสนใจในด้าน Web Developer / RPA & AI Automation Developer
+            มีพื้นฐานด้านการพัฒนาเว็บไซต์และระบบเครือข่าย และยังสามารถใช้ RPA, Generative AI เข้ามาช่วยเพิ่มประสิทธิภาพการทำงานขององค์กรได้</p>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education">
+        <h2 class="section-title">ประวัติการศึกษา</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-year">2567 - ปัจจุบัน</div>
+                <div class="timeline-title">มหาวิทยาลัยศรีปทุม | ปริญญาตรี</div>
+                <div class="timeline-desc">คณะเทคโนโลยีสารสนเทศ (GPA: 3.63)</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">2565 - 2567</div>
+                <div class="timeline-title">วิทยาลัยเทคโนโลยีบริหารธุรกิจจำนงค์ | ปวส.</div>
+                <div class="timeline-desc">คณะคอมพิวเตอร์ธุรกิจ (GPA: 3.49)</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2 class="section-title">ทักษะและความสามารถ</h2>
+        <div class="skills-container">
+            <div class="skill-tag">HTML</div>
+            <div class="skill-tag">CSS</div>
+            <div class="skill-tag">JavaScript</div>
+            <div class="skill-tag">UiPath</div>
+            <div class="skill-tag">N8N</div>
+            <div class="skill-tag">VS Code</div>
+            <div class="skill-tag">Github</div>
+            <div class="skill-tag">Cisco</div>
+            <div class="skill-tag">Canva</div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2 class="section-title">ผลงานระหว่างศึกษา</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-title">N8N Price Tracker</div>
+                <div class="project-desc">ระบบติดตามราคา E-commerce อัตโนมัติด้วย AI ช่วยวิเคราะห์และแจ้งเตือนการเปลี่ยนแปลงของราคาได้อย่างแม่นยำ</div>
+            </div>
+            <div class="project-card">
+                <div class="project-title">RPA Automation</div>
+                <div class="project-desc">ระบบเบิกจ่ายใบเสร็จอัตโนมัติด้วยเทคโนโลยี ช่วยลดระยะเวลาในการทำงานซ้ำซ้อนและเพิ่มความถูกต้องของข้อมูล</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Footer Section -->
+    <footer id="contact">
+        <h2 class="section-title" style="color: var(--text-light);">ช่องทางการติดต่อ</h2>
+        <div class="contact-info">
+            <div class="contact-item">
+                <strong>เบอร์โทรศัพท์</strong>
+                <span>065-421-3678</span>
+            </div>
+            <div class="contact-item">
+                <strong>อีเมล</strong>
+                <a href="mailto:note2559ssa@gmail.com">note2559ssa@gmail.com</a>
+            </div>
+            <div class="contact-item">
+                <strong>GitHub</strong>
+                <a href="https://github.com/BigNote46" target="_blank">github.com/BigNote46</a>
+            </div>
+            <div class="contact-item">
+                <strong>ที่อยู่</strong>
+                <span>51/50 ม.2 รินทร์ทอง ซ.3<br>ต.คูคต อ.ลำลูกกา จ.ปทุมธานี 12130</span>
+            </div>
+        </div>
+        <p style="margin-top: 40px; font-size: 0.8rem; color: #888;">© 2026 Pramote Damkram. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
